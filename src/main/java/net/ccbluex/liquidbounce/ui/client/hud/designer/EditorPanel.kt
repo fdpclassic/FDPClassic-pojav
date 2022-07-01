@@ -436,12 +436,12 @@ class EditorPanel(private val hudDesigner: GuiHudDesigner, var x: Int, var y: In
 
         // Header
         RenderUtils.drawRoundedCornerRect(x.toFloat()-3f, y-1.5F, x + width.toFloat()+4, y + 12F ,3f, Color(32,150,243, 255).rgb)
-        Fonts.font32.drawString("§l${element.name}", x + 2F, y + 3.5F, Color.WHITE.rgb)
+        Fonts.font35.drawString("§l${element.name}", x + 2F, y + 3.5F, Color.WHITE.rgb)
 
 
         // Delete button
         val deleteWidth = x + width - Fonts.font35.getStringWidth("§lDelete") - 2F
-        Fonts.font32.drawString("§lDelete", deleteWidth, y + 4F, Color.WHITE.rgb)
+        Fonts.font35.drawString("§lDelete", deleteWidth, y + 4F, Color.WHITE.rgb)
         if (Mouse.isButtonDown(0) && !mouseDown && mouseX >= deleteWidth && mouseX <= x + width && mouseY >= y &&
             mouseY <= y + 10) {
             LiquidBounce.hud.removeElement(element)
