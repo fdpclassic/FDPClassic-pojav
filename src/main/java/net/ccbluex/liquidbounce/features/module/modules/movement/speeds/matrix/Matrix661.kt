@@ -6,33 +6,34 @@ import net.ccbluex.liquidbounce.utils.MovementUtils
 import net.ccbluex.liquidbounce.value.BoolValue
 import net.minecraft.network.play.server.S12PacketEntityVelocity
 import kotlin.math.sqrt
+import net.minecraft.client.settings.GameSettings
 
 
-class MatrixHop2 : SpeedMode("Matrix6.6.1") {
-    val veloBoostValue = BoolValue("MatrixVelocBoost", true)
-	  val timerBoostValue = BoolValue("MatrixTimerBoost", true)
+class Matrix661 : SpeedMode("Matrix6.6.1") {
+    private val veloBoostValue = BoolValue("${valuePrefix}VelocBoost", true)
+    private val timerBoostValue = BoolValue("${valuePrefix}TimerBoost", false)
     private var recX = 0.0
     private var recZ = 0.0
 
     override fun onUpdate() {
         mc.thePlayer.jumpMovementFactor = 0.0266f
         if (!mc.thePlayer.onGround) {
-            mc.gameSettings.keyBindJump.pressed = mc.gameSettings.keyBindJump.isKeyDown
+            mc.gameSettings.keyBindJump.pressed = GameSettings.isKeyDown(mc.gameSettings.keyBindJump)
             if (MovementUtils.getSpeed() < 0.217) {
                 MovementUtils.strafe(0.217f)
                 mc.thePlayer.jumpMovementFactor = 0.0269f
             }
         }
         if (mc.thePlayer.motionY < 0) {
-			timer(1.09f)
+            timer(1.09f)
             if (mc.thePlayer.fallDistance > 1.4)
-				timer(1.0f)
+                timer(1.0f)
         } else {
-			timer(0.95f)
+            timer(0.95f)
         }
         if (mc.thePlayer.onGround && MovementUtils.isMoving()) {
             mc.gameSettings.keyBindJump.pressed = false
-			timer(1.03f)
+            timer(1.03f)
             mc.thePlayer.jump()
             if (mc.thePlayer.movementInput.moveStrafe <= 0.01 && mc.thePlayer.movementInput.moveStrafe >= -0.01) {
                 MovementUtils.strafe((MovementUtils.getSpeed() * 1.0071).toFloat())
@@ -48,11 +49,11 @@ class MatrixHop2 : SpeedMode("Matrix6.6.1") {
         mc.timer.timerSpeed = 1f
     }
 
-	private fun timer(value: Float) {
-		if(timerBoostValue.get()) {
-			mc.timer.timerSpeed = value
-		}
-	}
+    private fun timer(value: Float) {
+        if(timerBoostValue.get()) {
+            mc.timer.timerSpeed = value
+        }
+    }
 
     override fun onPacket(event: PacketEvent) {
         val packet = event.packet
