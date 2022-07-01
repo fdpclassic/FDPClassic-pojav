@@ -1,10 +1,9 @@
 # FDPClassic (fdp DEBLOATED)
 [![State-of-the-art Shitcode](https://img.shields.io/static/v1?label=State-of-the-art&message=Shitcode&color=7B5804)](https://github.com/trekhleb/state-of-the-art-shitcode)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/UnlegitMC/FDPClient)
-![GitHub lines of code](https://tokei.rs/b1/github/UnlegitMC/FDPClient)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/fdpclassic/FDPclassic)
+![GitHub lines of code](https://tokei.rs/b1/github/fdpclassic/FDPclassic)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a41ae7bde63c143e426a/maintainability)](https://codeclimate.com/github/UnlegitMC/FDPClient/maintainability)
 ![Minecraft](https://img.shields.io/badge/game-Minecraft-brightgreen)  
-[![Crowdin](https://badges.crowdin.net/fdpclient/localized.svg)](https://translate.getfdp.today/project/fdpclient)  
 A free mixin-based injection hacked-client for Minecraft using Minecraft Forge based on LiquidBounce.
 
 Website: https://fdpinfo.github.io 
@@ -12,8 +11,10 @@ Latest: [github-actions](https://github.com/UnlegitMC/FDPClient/actions/workflow
 Discord: https://discord.gg/55x7TaHWXG  
 Gitee mirror: https://gitee.com/fdpclient-cn/FDPClient
 
-## For the bright future!
-因为UnlegitMC Team内部原因，Liulihaocai#3747退出开发团队
+## Warning from breadcat.
+fdp classic is use at own risk and is not related with unlegitmc. we will not support you in case somthing goes seriously wrong nor are we responsible.
+
+updates may be rare.
 
 ## Issues
 If you notice any bugs or missing features, you can let us know by opening an issue [here](https://github.com/UnlegitMC/FDPClient/issues).

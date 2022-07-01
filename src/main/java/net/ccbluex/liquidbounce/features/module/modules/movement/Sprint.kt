@@ -22,12 +22,13 @@ import net.minecraft.potion.Potion
 
 @ModuleInfo(name = "Sprint", category = ModuleCategory.MOVEMENT, defaultOn = true)
 class Sprint : Module() {
-    val jumpDirectionsValue = BoolValue("JumpDirection", true)
+    val jumpDirectionsValue = BoolValue("JumpDirections", false)
     val allDirectionsValue = BoolValue("AllDirections", true)
     private val allDirectionsBypassValue = ListValue("AllDirectionsBypass", arrayOf("Rotate", "Toggle", "Minemora", "Spoof", "LimitSpeed", "None"), "None").displayable { allDirectionsValue.get() }
     private val blindnessValue = BoolValue("Blindness", true)
     val useItemValue = BoolValue("UseItem", false)
     val foodValue = BoolValue("Food", true)
+    val noStopServerSide = BoolValue("ServerSideKeepSprint", false).displayable { !noPacket.get() }
     val checkServerSide = BoolValue("CheckServerSide", false)
     val checkServerSideGround = BoolValue("CheckServerSideOnlyGround", false).displayable { checkServerSide.get() }
     private val noPacket = BoolValue("NoPacket", false)
@@ -70,7 +71,12 @@ class Sprint : Module() {
                         mc.netHandler.addToSendQueue(C0BPacketEntityAction(mc.thePlayer, C0BPacketEntityAction.Action.STOP_SPRINTING))
                         mc.netHandler.addToSendQueue(C0BPacketEntityAction(mc.thePlayer, C0BPacketEntityAction.Action.START_SPRINTING))
                     }
-                    "minemora" -> mc.thePlayer.setPosition(mc.thePlayer.posX, mc.thePlayer.posY + 0.0000013, mc.thePlayer.posZ)
+                    "minemora" -> {
+                        if (mc.thePlayer.onGround) {
+                            mc.thePlayer.setPosition(mc.thePlayer.posX, mc.thePlayer.posY + 0.0000013, mc.thePlayer.posZ)
+                            mc.thePlayer.motionY = 0.0
+                        }
+                    }
                     "limitspeed" -> {
                         if (!allDirectionsLimitSpeedGround.get() || mc.thePlayer.onGround) {
                             MovementUtils.limitSpeedByPercent(allDirectionsLimitSpeedValue.get())
@@ -91,6 +97,9 @@ class Sprint : Module() {
         val packet = event.packet
 
         if (noPacket.get() && packet is C0BPacketEntityAction && (packet.action == C0BPacketEntityAction.Action.START_SPRINTING || packet.action == C0BPacketEntityAction.Action.STOP_SPRINTING)) {
+            event.cancelEvent()
+        }
+        if (noStopServerSide.get() && packet is C0BPacketEntityAction && packet.action == C0BPacketEntityAction.Action.STOP_SPRINTING) {
             event.cancelEvent()
         }
     }
