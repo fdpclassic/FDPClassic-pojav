@@ -22,6 +22,11 @@ public abstract class MixinGuiIngameMenu extends MixinGuiScreen {
             this.buttonList.add(new GuiButton(1337, this.width / 2 - 100, this.height / 4 + 128, "%ui.reconnect%"));
     }
 
+    @Inject(method = "drawScreen", at = @At("RETURN"))
+    private void drawScreen(int p_drawScreen_1_, int p_drawScreen_2_, float p_drawScreen_3_,CallbackInfo callbackInfo) {
+
+    }
+
     @Inject(method = "actionPerformed", at = @At("HEAD"))
     private void actionPerformed(GuiButton button, CallbackInfo callbackInfo) {
         if(button.id == 1337) {
