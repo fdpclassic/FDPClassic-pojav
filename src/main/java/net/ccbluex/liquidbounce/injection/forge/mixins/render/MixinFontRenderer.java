@@ -8,6 +8,7 @@ package net.ccbluex.liquidbounce.injection.forge.mixins.render;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.modules.render.BetterFont;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
+import net.ccbluex.liquidbounce.event.TextEvent;
 import net.ccbluex.liquidbounce.ui.i18n.LanguageManager;
 import net.minecraft.client.gui.FontRenderer;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,7 +24,9 @@ public abstract class MixinFontRenderer {
         if (string == null || LiquidBounce.eventManager == null)
             return string;
 
-        return LanguageManager.INSTANCE.replace(string);
+        final TextEvent textEvent = new TextEvent(string);
+        LiquidBounce.eventManager.callEvent(textEvent);
+        return textEvent.getText();
     }
 
     @ModifyVariable(method = "getStringWidth", at = @At("HEAD"), ordinal = 0)
@@ -31,13 +34,17 @@ public abstract class MixinFontRenderer {
         if (string == null || LiquidBounce.eventManager == null)
             return string;
 
-        return LanguageManager.INSTANCE.replace(string);
+        final TextEvent textEvent = new TextEvent(string);
+        LiquidBounce.eventManager.callEvent(textEvent);
+        return textEvent.getText();
     }
 
     @Inject(method = "drawString(Ljava/lang/String;FFIZ)I", at = @At("HEAD"), cancellable = true)
     public void drawString(String p_drawString_1_, float p_drawString_2_, float p_drawString_3_, int p_drawString_4_, boolean p_drawString_5_, CallbackInfoReturnable<Integer> cir) {
         if(BetterFont.INSTANCE.getState()){
-            cir.setReturnValue(Fonts.font35.drawString(p_drawString_1_,p_drawString_2_,p_drawString_3_,p_drawString_4_,p_drawString_5_));
+            //cir.setReturnValue((int) FontLoaders.C18.DisplayFont(p_drawString_1_,p_drawString_2_,p_drawString_3_,p_drawString_4_,p_drawString_5_,FontLoaders.C18));
+
+            cir.setReturnValue((int) Fonts.font32.drawString(p_drawString_1_,p_drawString_2_,p_drawString_3_,p_drawString_4_,p_drawString_5_));
             cir.cancel();
         }
     }
@@ -45,7 +52,8 @@ public abstract class MixinFontRenderer {
     @Inject(method = "getStringWidth", at = @At("HEAD"), cancellable = true)
     public void getStringWidth(String p_getStringWidth_1_, CallbackInfoReturnable<Integer> cir) {
         if(BetterFont.INSTANCE.getState()){
-            cir.setReturnValue(Fonts.font35.getStringWidth(p_getStringWidth_1_));
+            //cir.setReturnValue(FontLoaders.C18.DisplayFontWidth(p_getStringWidth_1_,FontLoaders.C18));
+            cir.setReturnValue(Fonts.font32.getStringWidth(p_getStringWidth_1_));
             cir.cancel();
         }
     }

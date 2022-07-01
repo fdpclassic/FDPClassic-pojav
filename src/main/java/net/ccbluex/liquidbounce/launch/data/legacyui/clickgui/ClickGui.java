@@ -8,6 +8,7 @@ package net.ccbluex.liquidbounce.launch.data.legacyui.clickgui;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
+import net.ccbluex.liquidbounce.features.module.modules.client.HUD;
 import net.ccbluex.liquidbounce.launch.data.legacyui.ClickGUIModule;
 import net.ccbluex.liquidbounce.launch.data.legacyui.clickgui.elements.ButtonElement;
 import net.ccbluex.liquidbounce.launch.data.legacyui.clickgui.elements.Element;
@@ -64,7 +65,8 @@ public class ClickGui extends GuiScreen {
         this.mouseY = mouseY;
 
         drawDefaultBackground();
-
+        int defaultHeight1 = (this.height);
+        int defaultWidth1 = (this.width);
         GlStateManager.scale(scale, scale, scale);
 
         for (final Panel panel : panels) {
@@ -113,7 +115,6 @@ public class ClickGui extends GuiScreen {
             if (mouseButton == 0 && panel.isHovering(mouseX, mouseY))
                 clickedPanel = panel;
         }
-
         if (clickedPanel != null) {
             clickedPanel.x2 = clickedPanel.x - mouseX;
             clickedPanel.y2 = clickedPanel.y - mouseY;
