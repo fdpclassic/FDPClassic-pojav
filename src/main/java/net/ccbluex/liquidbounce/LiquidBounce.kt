@@ -11,10 +11,8 @@ import net.ccbluex.liquidbounce.event.EventManager
 import net.ccbluex.liquidbounce.features.command.CommandManager
 import net.ccbluex.liquidbounce.features.macro.MacroManager
 import net.ccbluex.liquidbounce.features.module.ModuleManager
-import net.ccbluex.liquidbounce.features.special.AntiForge
-import net.ccbluex.liquidbounce.features.special.CombatManager
-import net.ccbluex.liquidbounce.features.special.DiscordRPC
-import net.ccbluex.liquidbounce.features.special.ServerSpoof
+import net.ccbluex.liquidbounce.features.special.BungeeCordSpoof
+import net.ccbluex.liquidbounce.features.special.*
 import net.ccbluex.liquidbounce.file.FileManager
 import net.ccbluex.liquidbounce.file.config.ConfigManager
 import net.ccbluex.liquidbounce.launch.EnumLaunchFilter
@@ -29,32 +27,26 @@ import net.ccbluex.liquidbounce.ui.font.Fonts
 import net.ccbluex.liquidbounce.ui.font.FontsGC
 import net.ccbluex.liquidbounce.ui.i18n.LanguageManager
 import net.ccbluex.liquidbounce.ui.sound.TipSoundManager
-import net.ccbluex.liquidbounce.utils.ClassUtils
-import net.ccbluex.liquidbounce.utils.ClientUtils
-import net.ccbluex.liquidbounce.utils.InventoryUtils
-import net.ccbluex.liquidbounce.utils.RotationUtils
-import net.ccbluex.liquidbounce.utils.misc.HttpUtils
-import net.ccbluex.liquidbounce.utils.misc.MiscUtils
+import net.ccbluex.liquidbounce.utils.*
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiScreen
 import net.minecraft.util.ResourceLocation
 import java.util.*
-import javax.swing.JOptionPane
 import kotlin.concurrent.thread
 
 object LiquidBounce {
 
     // Client information
-    const val CLIENT_NAME = "FDPClient"
+    const val CLIENT_NAME = "FDPClassic"
     const val COLORED_NAME = "§c§lFDP§6§lClient"
     const val CLIENT_CREATOR = "CCBlueX & UnlegitMC"
-    const val CLIENT_WEBSITE = "GetFDP.Today"
+    const val CLIENT_WEBSITE = "fdpinfo.github.io"
     const val MINECRAFT_VERSION = "1.8.9"
 
     @JvmField
     val gitInfo = Properties().also {
         val inputStream = LiquidBounce::class.java.classLoader.getResourceAsStream("git.properties")
-        if(inputStream != null) {
+        if (inputStream != null) {
             it.load(inputStream)
         } else {
             it["git.branch"] = "unofficial" // fill with default values or we'll get null pointer exceptions
@@ -126,7 +118,10 @@ object LiquidBounce {
         eventManager.registerListener(RotationUtils())
         eventManager.registerListener(AntiForge)
         eventManager.registerListener(InventoryUtils)
+        eventManager.registerListener(BungeeCordSpoof())
         eventManager.registerListener(ServerSpoof)
+        eventManager.registerListener(SessionUtils())
+        eventManager.registerListener(StatisticsUtils())
 
         // Create command manager
         commandManager = CommandManager()
