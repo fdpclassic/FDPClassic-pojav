@@ -9,7 +9,7 @@ class SpartanFly : FlyMode("Spartan") {
     private val timer = TickTimer()
 
     override fun onUpdate(event: UpdateEvent) {
-        fly.antiDesync = tru
+        fly.antiDesync = true
         mc.thePlayer.motionY = 0.0
         timer.update()
         if (timer.hasTimePassed(12)) {

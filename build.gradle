@@ -79,7 +79,11 @@ dependencies {
     } // for read dynamic capes
 
     include("com.github.UnlegitMC:Astar3d:bec2291cf2") // pathfinding
-
+  
+    // TheAltening
+    include 'com.github.TheAltening:TheAltening4j:d0771f42d3'
+    include 'com.github.TheAltening:API-Java-AuthLib:-SNAPSHOT'
+    
     include fileTree(include: ["*.jar"], dir: "libs")
 }
 
