@@ -43,6 +43,8 @@ object LiquidBounce {
     const val CLIENT_CREATOR = "CCBlueX & UnlegitMC"
     const val CLIENT_WEBSITE = "fdpinfo.github.io"
     const val MINECRAFT_VERSION = "1.8.9"
+    var Darkmode = false
+    const val VERSIONTYPE = "classic"
 
     @JvmField
     val gitInfo = Properties().also {

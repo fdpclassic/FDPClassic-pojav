@@ -1,4 +1,4 @@
-ackage net.ccbluex.liquidbounce.features.module.modules.movement.flys.other
+package net.ccbluex.liquidbounce.features.module.modules.movement.flys.other
 
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.EventState
@@ -18,7 +18,7 @@ import java.util.concurrent.LinkedBlockingQueue
 import net.minecraft.client.settings.GameSettings
 
 class MinemoraFly : FlyMode("Minemora") {
-
+    
     private var tick = 0
     private var disableLogger = false
     private val packetBuffer = LinkedBlockingQueue<Packet<INetHandlerPlayServer>>()
