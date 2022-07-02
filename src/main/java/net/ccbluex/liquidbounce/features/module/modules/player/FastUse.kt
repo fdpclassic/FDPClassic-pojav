@@ -62,7 +62,7 @@ class FastUse : Module() {
 
                     mc.playerController.onStoppedUsingItem(mc.thePlayer)
                 }
-                
+
                 "ncp" -> if (mc.thePlayer.itemInUseDuration > 14) {
                     repeat(20) {
                         mc.netHandler.addToSendQueue(C03PacketPlayer(mc.thePlayer.onGround))
@@ -85,7 +85,6 @@ class FastUse : Module() {
                             mc.netHandler.addToSendQueue(C03PacketPlayer(mc.thePlayer.onGround))
                         }
                     }
-                }
                 }
                 "newaac" -> {
                     mc.timer.timerSpeed = 0.49F
