@@ -27,7 +27,11 @@ object GuiCapeManager : GuiScreen() {
 
     init {
         arrayOf("aurora", "forest", "hot", "indigo", "lava", "lime", "night").forEach {
+        try {
             embeddedCapes.add(loadCapeFromResource(it, "assets/minecraft/fdpclient/cape/$it.png"))
+            }catch (e: Throwable){
+                System.out.println("Failed to load Capes")
+            }
         }
         nowCape = embeddedCapes.random()
         pushEmbeddedCape()

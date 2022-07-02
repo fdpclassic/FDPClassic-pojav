@@ -28,6 +28,7 @@ import net.ccbluex.liquidbounce.ui.font.FontsGC
 import net.ccbluex.liquidbounce.ui.i18n.LanguageManager
 import net.ccbluex.liquidbounce.ui.sound.TipSoundManager
 import net.ccbluex.liquidbounce.utils.*
+import net.ccbluex.liquidbounce.utils.misc.HttpUtils
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiScreen
 import net.minecraft.util.ResourceLocation
@@ -199,13 +200,6 @@ object LiquidBounce {
 
             if (latest != gitInfo["git.commit.id.abbrev"]) {
                 ClientUtils.logInfo("New version available: $latest")
-
-                val buttons = arrayOf(LanguageManager.get("ui.update.download"), LanguageManager.get("ui.update.dismiss"))
-                val selection = JOptionPane.showOptionDialog(null, LanguageManager.getAndFormat("ui.update.released", latest), "Alert",
-                    JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[0])
-                if (selection == 0) {
-                    MiscUtils.showURL("https://$CLIENT_WEBSITE")
-                }
             } else {
                 ClientUtils.logInfo("No new version available")
             }

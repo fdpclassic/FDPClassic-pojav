@@ -58,6 +58,7 @@ class GuiDirectLogin(private val prevGui: GuiAltManager) : GuiScreen() {
                     return
                 }
                 Thread {
+                val res = GuiAltManager.login(AccountSerializer.accountInstance(username.text, password.text))
                     status = "§a%ui.alt.loggingIn%"
                     status = res
                 }.start()
