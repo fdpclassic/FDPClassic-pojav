@@ -6,7 +6,7 @@ import java.util.regex.Pattern
 
 object LanguageManager {
     val key = "%"
-    val defaultLocale = "en_us"
+    val defaultLocale = "en_US"
 
     var language = Language(defaultLocale)
         private set(value) {

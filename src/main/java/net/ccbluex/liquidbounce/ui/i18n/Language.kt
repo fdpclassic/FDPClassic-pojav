@@ -31,7 +31,7 @@ class Language(val locale: String) {
             return it
         }
 
-        throw IllegalStateException("Can't find language file! Try sync gitsubmodule if this is a custom build!")
+        throw IllegalStateException("oops! Can't find language file! Is it in the correct path?")
     }
 
     private fun read(locale: String) {
