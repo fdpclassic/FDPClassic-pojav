@@ -28,7 +28,7 @@ import java.awt.Color
 import java.util.*
 
 class GuiAltManager(private val prevGui: GuiScreen) : GuiScreen() {
-    var status = "§7%ui.alt.idle%"
+    var status = "%ui.alt.idle%"
     private lateinit var altsList: GuiList
 
     override fun initGui() {

@@ -6,6 +6,7 @@ import net.minecraft.client.gui.GuiButton
 import net.minecraft.client.gui.GuiScreen
 import net.minecraft.client.gui.GuiTextField
 import org.lwjgl.input.Keyboard
+import net.ccbluex.liquidbounce.ui.i18n.LanguageManager
 
 class GuiServerSpoof(private val prevGui: GuiScreen) : GuiScreen() {
 
