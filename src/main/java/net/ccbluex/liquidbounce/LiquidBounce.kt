@@ -114,8 +114,7 @@ object LiquidBounce {
         // Create event manager
         eventManager = EventManager()
 
-        // Load language
-        LanguageManager.switchLanguage(Minecraft.getMinecraft().gameSettings.language)
+
 
         // Register listeners
         eventManager.registerListener(RotationUtils())
@@ -173,6 +172,9 @@ object LiquidBounce {
         hud = HUD.createDefault()
 
         fileManager.loadConfigs(fileManager.hudConfig, fileManager.xrayConfig)
+
+        // Load language
+        LanguageManager.switchLanguage(Minecraft.getMinecraft().gameSettings.language)
 
         // start discord rpc
         thread {
