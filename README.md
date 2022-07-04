@@ -1,4 +1,4 @@
-# FDPClassic (fdp DEBLOATED)
+# FDPClassic (fdp v4 with older visuals)
 [![State-of-the-art Shitcode](https://img.shields.io/static/v1?label=State-of-the-art&message=Shitcode&color=7B5804)](https://github.com/trekhleb/state-of-the-art-shitcode)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/fdpclassic/FDPclassic)
 ![GitHub lines of code](https://tokei.rs/b1/github/fdpclassic/FDPclassic)
@@ -7,13 +7,13 @@ A free mixin-based injection hacked-client for Minecraft using Minecraft Forge b
 
 Website: https://fdpinfo.github.io 
 Latest: [github-actions](https://github.com/UnlegitMC/FDPClient/actions/workflows/build.yml?query=event%3Apush) | https://fdpinfo.github.io/download
-Discord: https://discord.gg/55x7TaHWXG  
-Gitee mirror: https://gitee.com/fdpclient-cn/FDPClient
+Discord: https://discord.gg/55x7TaHWXG     (ping gatodepan#6386 for support with classic)
+
 
 ## Warning from breadcat.
 fdp classic is use at own risk and is not related with unlegitmc. we will not support you in case somthing goes seriously wrong nor are we responsible.
-
 updates may be rare.
+Fdp classic should not be seen as an alternative to fdp but simply a sister Client sharing most code.
 
 ## Issues
 If you notice any bugs or missing features, you can let us know by opening an issue [here](https://github.com/UnlegitMC/FDPClient/issues).
