@@ -48,7 +48,6 @@ class GameFontRenderer(font: Font) : FontRenderer(Minecraft.getMinecraft().gameS
     override fun drawStringWithShadow(text: String, x: Float, y: Float, color: Int) = drawString(text, x, y, color, true)
 
     override fun drawString(text: String, x: Float, y: Float, color: Int, shadow: Boolean): Int {
-        var currentText = text
         val currentText = LanguageManager.replace(text)
         val event = TextEvent(currentText)
         LiquidBounce.eventManager.callEvent(event)
