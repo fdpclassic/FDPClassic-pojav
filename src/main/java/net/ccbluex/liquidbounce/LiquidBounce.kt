@@ -45,6 +45,7 @@ object LiquidBounce {
     const val MINECRAFT_VERSION = "1.8.9"
     var Darkmode = false
     const val VERSIONTYPE = "classic"
+    const val FDPVERSION = "2.0a"
 
     @JvmField
     val gitInfo = Properties().also {

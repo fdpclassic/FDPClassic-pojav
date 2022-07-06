@@ -1,4 +1,4 @@
-# FDPClassic (fdp v4 with older visuals)
+# FDPClassic v2 (fdp v4 with older visuals)
 [![State-of-the-art Shitcode](https://img.shields.io/static/v1?label=State-of-the-art&message=Shitcode&color=7B5804)](https://github.com/trekhleb/state-of-the-art-shitcode)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/fdpclassic/FDPclassic)
 ![GitHub lines of code](https://tokei.rs/b1/github/fdpclassic/FDPclassic)
@@ -10,7 +10,7 @@ Latest: [github-actions](https://github.com/UnlegitMC/FDPClient/actions/workflow
 Discord: https://discord.gg/55x7TaHWXG     (ping gatodepan#6386 for support with classic)
 
 
-## Warning from breadcat.
+## Warning from breadcat. 
 fdp classic is use at own risk and is not related with unlegitmc. we will not support you in case somthing goes seriously wrong nor are we responsible.
 updates may be rare.
 Fdp classic should not be seen as an alternative to fdp but simply a sister Client sharing most code.
