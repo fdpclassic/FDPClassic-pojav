@@ -4,19 +4,23 @@
 ![GitHub lines of code](https://tokei.rs/b1/github/fdpclassic/FDPclassic)
 ![Minecraft](https://img.shields.io/badge/game-Minecraft-brightgreen)  
 A free mixin-based injection hacked-client for Minecraft using Minecraft Forge based on LiquidBounce.
-
 Website: https://fdpinfo.github.io 
-Latest: [github-actions](https://github.com/UnlegitMC/FDPClient/actions/workflows/build.yml?query=event%3Apush) | https://fdpinfo.github.io/download
+Latest: [github-actions](https://github.com/fdpclassic/FDPClassic/actions/workflows/build.yml?query=event%3Apush) | https://fdpinfo.github.io/download
 Discord: https://discord.gg/55x7TaHWXG     (ping gatodepan#6386 for support with classic)
 
-
 ## Warning from breadcat. 
-fdp classic is use at own risk and is not related with unlegitmc. we will not support you in case somthing goes seriously wrong nor are we responsible.
+fdp classic is use at own risk and is not related with SkidderMc. we will not support you in case somthing goes seriously wrong nor are we responsible.
 updates may be rare.
 Fdp classic should not be seen as an alternative to fdp but simply a sister Client sharing most code.
 
+### versioning 
+fdp classic release version numbers have 2 important parts<br>
+the first part is the major version number (example 2.3)<br>
+the second part is the patch letter (example 2.3b)<br>
+so build 5 of 4.1 would be 4.1e
+
 ## Issues
-If you notice any bugs or missing features, you can let us know by opening an issue [here](https://github.com/UnlegitMC/FDPClient/issues).
+If you notice any bugs or missing features, you can let us know by opening an issue [here](https://github.com/fdpclassic/FDPClassic/issues).
 
 ## License
 This project is subject to the [GNU General Public License v3.0](LICENSE). This does only apply for source code located directly in this clean repository. During the development and compilation process, additional source code may be used to which we have obtained no rights. Such code is not covered by the GPL license.
