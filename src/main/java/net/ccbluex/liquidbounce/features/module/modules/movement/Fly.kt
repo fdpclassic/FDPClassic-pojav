@@ -1,17 +1,17 @@
+/*
+ * FDPClient Hacked Client
+ * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge by LiquidBounce.
+ * https://github.com/SkidderMC/FDPClient/
+ */
 package net.ccbluex.liquidbounce.features.module.modules.movement
 
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.*
-import net.ccbluex.liquidbounce.features.module.EnumAutoDisableType
-import net.ccbluex.liquidbounce.features.module.Module
-import net.ccbluex.liquidbounce.features.module.ModuleCategory
-import net.ccbluex.liquidbounce.features.module.ModuleInfo
+import net.ccbluex.liquidbounce.features.module.*
 import net.ccbluex.liquidbounce.features.module.modules.movement.flys.FlyMode
 import net.ccbluex.liquidbounce.utils.ClassUtils
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
-import net.ccbluex.liquidbounce.value.BoolValue
-import net.ccbluex.liquidbounce.value.FloatValue
-import net.ccbluex.liquidbounce.value.ListValue
+import net.ccbluex.liquidbounce.value.*
 import net.minecraft.network.play.server.S19PacketEntityStatus
 import org.lwjgl.input.Keyboard
 import java.awt.Color
@@ -51,8 +51,11 @@ class Fly : Module() {
 
     var antiDesync = false
 
+    var needReset = true
+
     override fun onEnable() {
         antiDesync = false
+        needReset = true
         if (mc.thePlayer.onGround && fakeDamageValue.get()) {
             val event = PacketEvent(S19PacketEntityStatus(mc.thePlayer, 2.toByte()), PacketEvent.Type.RECEIVE)
             LiquidBounce.eventManager.callEvent(event)
@@ -79,7 +82,7 @@ class Fly : Module() {
         mc.timer.timerSpeed = 1F
         mc.thePlayer.speedInAir = 0.02F
 
-        if (motionResetValue.get()) {
+        if (motionResetValue.get() && needReset) {
             mc.thePlayer.motionX = 0.0
             mc.thePlayer.motionY = 0.0
             mc.thePlayer.motionZ = 0.0
