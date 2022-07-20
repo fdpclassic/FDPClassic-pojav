@@ -28,6 +28,8 @@ import java.text.DecimalFormat
 class FollowTargetHud : Module() {
     private val modeValue = ListValue("Mode", arrayOf("Juul", "Jello", "Material", "Arris", "FDP"), "Juul")
     private val fontValue = FontValue("Font", Fonts.font40)
+    private val smoothMove = BoolValue("SmoothHudMove", true)
+    private val smoothValue = IntegerValue("SmoothHudMoveValue", 3, 1, 8).displayable { smoothMove.get() }
     private val jelloColorValue = BoolValue("JelloHPColor", true).displayable { modeValue.equals("Jello") }
     private val jelloAlphaValue = IntegerValue("JelloAlpha", 170, 0, 255).displayable { modeValue.equals("Jello") }
     private val scaleValue = FloatValue("Scale", 1F, 1F, 4F)
@@ -37,6 +39,10 @@ class FollowTargetHud : Module() {
 
     private var targetTicks = 0
     private var entityKeep = "yes"
+    
+    private var lastX = 0.0
+    private var lastY = 0.0
+    private var lastZ = 0.0
 
     companion object {
         val HEALTH_FORMAT = DecimalFormat("#.#")
@@ -98,7 +104,7 @@ class FollowTargetHud : Module() {
         if (targetTicks == 0) {
             return
         }
-
+        
         // Set fontrenderer local
         val fontRenderer = fontValue.get()
         val font = fontValue.get()
@@ -109,12 +115,20 @@ class FollowTargetHud : Module() {
         // Translate to player position
         val renderManager = mc.renderManager
         val timer = mc.timer
-
-        glTranslated( // Translate to player position with render pos and interpolate it
-            entity.lastTickPosX + (entity.posX - entity.lastTickPosX) * timer.renderPartialTicks - renderManager.renderPosX,
-            entity.lastTickPosY + (entity.posY - entity.lastTickPosY) * timer.renderPartialTicks - renderManager.renderPosY + entity.eyeHeight.toDouble() + translateY.get().toDouble(),
-            entity.lastTickPosZ + (entity.posZ - entity.lastTickPosZ) * timer.renderPartialTicks - renderManager.renderPosZ
-        )
+        
+        if (smoothMove.get()) {
+            lastX += ((entity.lastTickPosX + (entity.posX - entity.lastTickPosX) * timer.renderPartialTicks - renderManager.renderPosX).toDouble() - lastX) / smoothValue.get().toDouble()          
+            lastY += ((entity.lastTickPosY + (entity.posY - entity.lastTickPosY) * timer.renderPartialTicks - renderManager.renderPosY + entity.eyeHeight.toDouble() + translateY.get().toDouble()).toDouble() - lastY) / smoothValue.get().toDouble()
+            lastZ += ((entity.lastTickPosZ + (entity.posZ - entity.lastTickPosZ) * timer.renderPartialTicks - renderManager.renderPosZ).toDouble() - lastZ) / smoothValue.get().toDouble()
+            
+            glTranslated( lastX, lastY, lastZ )
+        } else {
+            glTranslated( // Translate to player position with render pos and interpolate it
+                entity.lastTickPosX + (entity.posX - entity.lastTickPosX) * timer.renderPartialTicks - renderManager.renderPosX,
+                entity.lastTickPosY + (entity.posY - entity.lastTickPosY) * timer.renderPartialTicks - renderManager.renderPosY + entity.eyeHeight.toDouble() + translateY.get().toDouble(),
+                entity.lastTickPosZ + (entity.posZ - entity.lastTickPosZ) * timer.renderPartialTicks - renderManager.renderPosZ
+            )
+        }
 
         // Rotate view to player
         glRotatef(-mc.renderManager.playerViewY, 0F, 1F, 0F)
@@ -135,7 +149,7 @@ class FollowTargetHud : Module() {
         // Enable blend
         enableGlCap(GL_BLEND)
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-
+        
         val name = entity.displayName.unformattedText
         var healthPercent = entity.health / entity.maxHealth
         // render hp bar
@@ -146,7 +160,7 @@ class FollowTargetHud : Module() {
         // Draw nametag
         when (modeValue.get().lowercase()) {
 
-
+          
             "juul" -> {
 
                 // render bg
@@ -157,34 +171,34 @@ class FollowTargetHud : Module() {
                 // draw strings
                 fontRenderer.drawString("Attacking", -105 + xChange.toInt(), -13, Color.WHITE.rgb)
                 fontRenderer.drawString(tag, -106 + xChange.toInt() , 10, Color.WHITE.rgb)
-
+                
                 val healthString = ( ( ( entity.health * 10f ).toInt() ).toFloat() * 0.1f ).toString() + " / 20"
                 fontRenderer.drawString(healthString, -25 - fontRenderer.getStringWidth(healthString).toInt() + xChange.toInt(), 22, Color.WHITE.rgb)
-
+                
                 val distanceString = "⤢" + ( ( ( mc.thePlayer.getDistanceToEntity(entity) * 10f ).toInt() ).toFloat() * 0.1f ).toString() 
                 fontRenderer.drawString(distanceString, -25 - fontRenderer.getStringWidth(distanceString).toInt() + xChange.toInt(), 10, Color.WHITE.rgb)
-
+                
                 // draw health bars
                 drawRoundedCornerRect(-104f + xChange, 22f, -50f + xChange, 30f, 1f, Color(64, 64, 64, 255).rgb) 
                 drawRoundedCornerRect(-104f + xChange, 22f, -104f + (healthPercent * 54) + xChange, 30f, 1f, Color.WHITE.rgb)
-
+                
             }
-
+            
             "material" -> {
                 glScalef(-scale * 2, -scale * 2, scale * 2)
-
+                
                 // render bg
                 drawRoundedCornerRect(-40f + xChange, 0f, 40f + xChange, 30f, 5f, Color(72, 72, 72, 220).rgb)
-
+                
                 // draw health bars
                 drawRoundedCornerRect(-35f + xChange, 7f, -35f + (healthPercent * 70) + xChange, 12f, 2f, Color(10, 250, 10, 255).rgb)
                 drawRoundedCornerRect(-35f + xChange, 17f, -35f + ((entity.totalArmorValue / 20F) * 70) + xChange, 22f, 2f, Color(10, 10, 250, 255).rgb)
-
-
+                
+                   
             }
-
+            
             "arris" -> {
-
+                
                 glScalef(-scale * 2, -scale * 2, scale * 2)
                 val hp = healthPercent
                 val additionalWidth = font.getStringWidth("${entity.name}  $hp hp").coerceAtLeast(75)
@@ -201,19 +215,19 @@ class FollowTargetHud : Module() {
                 drawRect(40f + xChange, yPos,     40 + xChange + (healthPercent) * additionalWidth, yPos + 4, Color.GREEN.rgb)
                 drawRect(40f + xChange, yPos + 9, 40 + xChange + (entity.totalArmorValue / 20F) * additionalWidth, yPos + 13, Color(77, 128, 255).rgb)   
             }
-
+            
             "FDP" -> {
-
+                
                 // render bg
                 glScalef(-scale * 2, -scale * 2, scale * 2)
                 drawRoundedCornerRect(-70f, 0f, 70f, 40f, 5f, Color(0, 0, 0, 95).rgb)
-
+                
                 // draw head
-
+                
                 // text
                 fontRenderer.drawString(name, -30 + xChange.toInt(), 5, Color.WHITE.rgb)
                 fontRenderer.drawString("Health ${entity.health.toInt()}", -30 + xChange.toInt(), 5 + font.FONT_HEIGHT, Color.WHITE.rgb)
-
+                
                 // hp bar
                 drawRoundedCornerRect(-30f + xChange, (5 + font.FONT_HEIGHT * 2).toFloat(), -30f + xChange + healthPercent * 95f, 37f, 3f, ColorUtils.rainbow().rgb)
 
