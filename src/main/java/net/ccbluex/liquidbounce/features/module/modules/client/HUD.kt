@@ -32,7 +32,7 @@ import java.util.*
 
 @ModuleInfo(name = "HUD", category = ModuleCategory.CLIENT, array = false, defaultOn = true)
 object HUD : Module() {
-        val shadowValue = ListValue("ShadowMode", arrayOf("LiquidBounce", "Outline", "Default", "Autumn"), "LiquidBounce")
+        val shadowValue = ListValue("ShadowMode", arrayOf("LiquidBounce", "Default"), "LiquidBounce")
     val clolormode = ListValue("ColorMode", arrayOf("Rainbow", "Light Rainbow", "Static", "Double Color", "Default"), "Light Rainbow")
     val hueInterpolation = BoolValue("hueInterpolation", false)
     val movingcolors = BoolValue("MovingColors", false)
@@ -60,7 +60,8 @@ object HUD : Module() {
     val arraylistYAxisAnimTypeValue = EaseUtils.getEnumEasingList("ArraylistYAxisAnimType")
     val arraylistYAxisAnimOrderValue = EaseUtils.getEnumEasingOrderList("ArraylistYAxisHotbarAnimOrder")
     val fontEpsilonValue = FloatValue("FontVectorEpsilon", 0.5f, 0f, 1.5f)
-    private val buttonValue = ListValue("Button", arrayOf("FLine", "Rounded", "Modern", "Rise", "Vanilla"), "FLine")
+    private val buttonValue = ListValue("Button", arrayOf("FLine", "Rounded", "Modern", "Rise", "Vanilla"), "Rounded")
+    // fuck xigua and his shitty button
 
     private var lastFontEpsilon = 0f
 
