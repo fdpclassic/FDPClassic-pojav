@@ -14,6 +14,7 @@ import net.ccbluex.liquidbounce.features.module.modules.client.button.AbstractBu
 import net.ccbluex.liquidbounce.features.module.modules.client.button.FLineButtonRenderer
 import net.ccbluex.liquidbounce.features.module.modules.client.button.RiseButtonRenderer
 import net.ccbluex.liquidbounce.features.module.modules.client.button.RoundedButtonRenderer
+import net.ccbluex.liquidbounce.features.module.modules.client.button.ModernButtonRenderer
 import net.ccbluex.liquidbounce.launch.data.legacyui.ClickGUIModule.*
 import net.ccbluex.liquidbounce.ui.client.hud.designer.GuiHudDesigner
 import net.ccbluex.liquidbounce.utils.render.Animation
@@ -59,7 +60,7 @@ object HUD : Module() {
     val arraylistYAxisAnimTypeValue = EaseUtils.getEnumEasingList("ArraylistYAxisAnimType")
     val arraylistYAxisAnimOrderValue = EaseUtils.getEnumEasingOrderList("ArraylistYAxisHotbarAnimOrder")
     val fontEpsilonValue = FloatValue("FontVectorEpsilon", 0.5f, 0f, 1.5f)
-    private val buttonValue = ListValue("Button", arrayOf("FLine", "Rounded", "Rise", "Vanilla"), "FLine")
+    private val buttonValue = ListValue("Button", arrayOf("FLine", "Rounded", "Modern", "Rise", "Vanilla"), "FLine")
 
     private var lastFontEpsilon = 0f
 
@@ -165,6 +166,7 @@ object HUD : Module() {
             "fline" -> FLineButtonRenderer(button)
             "rounded" -> RoundedButtonRenderer(button)
             "rise" -> RiseButtonRenderer(button)
+            "modern" -> ModernButtonRenderer(button)
             else -> null // vanilla or unknown
         }
     }
