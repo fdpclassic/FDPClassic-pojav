@@ -32,7 +32,7 @@ import java.util.*
 
 @ModuleInfo(name = "HUD", category = ModuleCategory.CLIENT, array = false, defaultOn = true)
 object HUD : Module() {
-        val shadowValue = ListValue("ShadowMode", arrayOf("LiquidBounce", "Outline", "Default", "Autumn"), "Outline")
+        val shadowValue = ListValue("ShadowMode", arrayOf("LiquidBounce", "Outline", "Default", "Autumn"), "LiquidBounce")
     val clolormode = ListValue("ColorMode", arrayOf("Rainbow", "Light Rainbow", "Static", "Double Color", "Default"), "Light Rainbow")
     val hueInterpolation = BoolValue("hueInterpolation", false)
     val movingcolors = BoolValue("MovingColors", false)
