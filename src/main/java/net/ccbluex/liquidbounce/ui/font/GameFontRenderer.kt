@@ -42,10 +42,25 @@ class GameFontRenderer(font: Font) : FontRenderer(Minecraft.getMinecraft().gameS
         FONT_HEIGHT = height
         FontsGC.register(this)
     }
+        fun getColorIndex2(type: Char): Int {
+            return when (type) {
+                in '0'..'9' -> type - '0'
+                in 'a'..'f' -> type - 'a' + 10
+                in 'k'..'o' -> type - 'k' + 16
+                'r' -> 21
+                else -> -1
+            }
+        }
+
 
     fun drawString(s: String, x: Float, y: Float, color: Int) = drawString(s, x, y, color, false)
 
     override fun drawStringWithShadow(text: String, x: Float, y: Float, color: Int) = drawString(text, x, y, color, true)
+    
+        fun drawCenteredString(s: String, x: Float, y: Float, color: Int, shadow: Boolean) = drawString(s, x - getStringWidth(s) / 2F, y, color, shadow)
+
+    fun drawCenteredString(s: String, x: Float, y: Float, color: Int) = drawStringWithShadow(s, x - getStringWidth(s) / 2F, y, color)
+
 
     override fun drawString(text: String, x: Float, y: Float, color: Int, shadow: Boolean): Int {
         val currentText = LanguageManager.replace(text)
