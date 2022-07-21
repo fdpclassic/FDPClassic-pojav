@@ -44,7 +44,7 @@ object LiquidBounce {
     const val CLIENT_WEBSITE = "fdpinfo.github.io"
     const val MINECRAFT_VERSION = "1.8.9"
     var Darkmode = false
-    const val VERSIONTYPE = "classic"
+    const val VERSIONTYPE = "classic-pojav"
     const val FDPVERSION = "2.1a"
 
     @JvmField
