@@ -48,6 +48,7 @@ class BlockBBEvent(blockPos: BlockPos, val block: Block, var boundingBox: AxisAl
  */
 class ClickBlockEvent(val clickedBlock: BlockPos?, val enumFacing: EnumFacing?) : Event()
 
+
 /**
  * Called when client is shutting down
  */
@@ -78,6 +79,10 @@ class MotionEvent(val eventState: EventState) : Event() {
     }
 }
 
+/**
+ * Called when an entity receives damage
+ */
+class EntityDamageEvent(val damagedEntity: Entity): Event()
 
 /**
  * Called in "onLivingUpdate" when the player is using a use item.
